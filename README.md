@@ -56,3 +56,9 @@ For MySQL / MariaDB the settings are:
     };
 
 **Note that the settings starting with process.env. comes from the .env file.**
+
+    use { 
+    	    "email": "admin@email.com", 
+    	    "password": "123456"
+    	 } 
+    to receive a token
