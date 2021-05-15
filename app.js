@@ -1,19 +1,19 @@
-import dotenv from 'dotenv';
-import { resolve } from 'path';
+const dotenv = require('dotenv');
+const { resolve } = require('path');
 
 dotenv.config();
 
-import './src/database';
+require('./src/database');
 
-import express from 'express';
-import cors from 'cors';
-import helmet from 'helmet';
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
 
-import homeRoutes from './src/routes/homeRoutes';
-import userRoutes from './src/routes/userRoutes';
-import tokenRoutes from './src/routes/tokenRoutes';
-import alunoRoutes from './src/routes/alunoRoutes';
-import photoRoutes from './src/routes/photoRoutes';
+const homeRoutes = require('./src/routes/homeRoutes');
+const userRoutes = require('./src/routes/userRoutes');
+const tokenRoutes = require('./src/routes/tokenRoutes');
+const alunoRoutes = require('./src/routes/alunoRoutes');
+const photoRoutes = require('./src/routes/photoRoutes');
 
 const whiteList = [
   'http://localhost:3000',
@@ -53,4 +53,4 @@ class App {
   }
 }
 
-export default new App().app;
+module.exports = new App().app;

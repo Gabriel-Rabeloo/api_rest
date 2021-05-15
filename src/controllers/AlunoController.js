@@ -1,5 +1,5 @@
-import Aluno from '../models/Aluno';
-import Foto from '../models/Foto';
+const Aluno = require('../models/Aluno');
+const Foto = require('../models/Foto');
 
 class AlunoController {
   async index(req, res) {
@@ -116,4 +116,5 @@ class AlunoController {
     }
   }
 }
-export default new AlunoController();
+
+module.exports = new AlunoController();

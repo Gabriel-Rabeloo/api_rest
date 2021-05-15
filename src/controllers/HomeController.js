@@ -3,4 +3,4 @@ class HomeController {
     res.json('index');
   }
 }
-export default new HomeController();
+module.exports = new HomeController();

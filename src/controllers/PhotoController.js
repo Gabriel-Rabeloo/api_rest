@@ -1,7 +1,7 @@
-import multer from 'multer';
-import multerConfig from '../config/multerConfig';
+const multer = require('multer');
+const multerConfig = require('../config/multerConfig');
 
-import Foto from '../models/Foto';
+const Foto = require('../models/Foto');
 
 const upload = multer(multerConfig).single('photo');
 
@@ -29,4 +29,4 @@ class PhotoController {
   }
 }
 
-export default new PhotoController();
+module.exports = new PhotoController();

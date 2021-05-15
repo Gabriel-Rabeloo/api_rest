@@ -15,6 +15,13 @@ module.exports = {
       allowNull: false,
       unique: true,
     },
+    email_checked: {
+      type: Sequelize.BOOLEAN,
+      allowNull: true,
+    },
+    code: {
+      type: Sequelize.STRING,
+    },
     password_hash: {
       type: Sequelize.STRING,
       allowNull: false,

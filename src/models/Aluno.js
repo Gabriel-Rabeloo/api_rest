@@ -1,6 +1,7 @@
-import Sequelize, { Model } from 'sequelize';
+const Sequelize = require('sequelize');
+const { Model } = require('sequelize');
 
-export default class Aluno extends Model {
+module.exports = class Aluno extends Model {
   static init(sequelize) {
     super.init({
       nome: {
@@ -71,4 +72,4 @@ export default class Aluno extends Model {
   static associate(models) {
     this.hasMany(models.Foto, { foreignKey: 'aluno_id' });
   }
-}
+};

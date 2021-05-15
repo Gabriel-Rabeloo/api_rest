@@ -1,8 +1,8 @@
-import Sequelize from 'sequelize';
-import databaseCongif from '../config/database';
-import Aluno from '../models/Aluno';
-import User from '../models/User';
-import Foto from '../models/Foto';
+const Sequelize = require('sequelize');
+const databaseCongif = require('../config/database');
+const Aluno = require('../models/Aluno');
+const User = require('../models/User');
+const Foto = require('../models/Foto');
 
 const models = [Aluno, User, Foto];
 

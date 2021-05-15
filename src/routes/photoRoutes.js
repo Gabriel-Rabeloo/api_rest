@@ -1,10 +1,10 @@
-import { Router } from 'express';
-import loginRequired from '../middlewares/loginRequired';
+const { Router } = require('express');
+const photoController = require('../controllers/PhotoController');
 
-import photoController from '../controllers/PhotoController';
+const loginRequired = require('../middlewares/loginRequired');
 
 const router = new Router();
 
 router.post('/', loginRequired, photoController.store);
 
-export default router;
+module.exports = router;

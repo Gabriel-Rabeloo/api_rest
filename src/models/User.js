@@ -1,7 +1,8 @@
-import Sequelize, { Model } from 'sequelize';
-import bcryptjs from 'bcryptjs';
+const Sequelize = require('sequelize');
+const { Model } = require('sequelize');
+const bcryptjs = require('bcryptjs');
 
-export default class User extends Model {
+module.exports = class User extends Model {
   static init(sequelize) {
     super.init({
       nome: {
@@ -13,6 +14,13 @@ export default class User extends Model {
             msg: 'Campo nome deve ter entre 3 e 255 caracteres',
           },
         },
+      },
+      email_checked: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
+      code: {
+        type: Sequelize.STRING,
       },
       email: {
         type: Sequelize.STRING,
@@ -55,4 +63,4 @@ export default class User extends Model {
   passwordIsValid(password) {
     return bcryptjs.compare(password, this.password_hash);
   }
-}
+};

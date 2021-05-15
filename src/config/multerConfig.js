@@ -1,9 +1,9 @@
-import multer from 'multer';
-import { extname, resolve } from 'path';
+const multer = require('multer');
+const { extname, resolve } = require('path');
 
 const rand = () => Math.floor(Math.random() * 1000 + 1000);
 
-export default {
+module.exports = {
 
   fileFilter: (req, file, cb) => {
     if (file.mimetype !== 'image/png' && file.mimetype !== 'image/jpeg') {

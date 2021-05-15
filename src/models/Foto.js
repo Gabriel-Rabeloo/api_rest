@@ -1,7 +1,8 @@
-import Sequelize, { Model } from 'sequelize';
-import appConfig from '../config/appConfig';
+const Sequelize = require('sequelize');
+const { Model } = require('sequelize');
+const appConfig = require('../config/appConfig');
 
-export default class Foto extends Model {
+module.exports = class Foto extends Model {
   static init(sequelize) {
     super.init({
       originalname: {
@@ -38,4 +39,4 @@ export default class Foto extends Model {
   static associate(models) {
     this.belongsTo(models.Aluno, { foreignKey: 'aluno_id' });
   }
-}
+};
