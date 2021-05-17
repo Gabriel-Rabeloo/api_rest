@@ -57,7 +57,6 @@ class TokenController {
         errors: ['Senha inválida'],
       });
     }
-    console.log(user.email_checked);
 
     if (user.email_checked === null || user.email_checked === 0 || user.email_checked === false) {
       try {
@@ -65,7 +64,7 @@ class TokenController {
 
         await User.update({ code }, { where: { email } });
 
-        return res.status(401).json({
+        return res.status(403).json({
           errors: ['Confirme seu e-mail para fazer login'],
         });
       } catch (err) {
@@ -78,23 +77,29 @@ class TokenController {
       expiresIn: process.env.TOKEN_EXPIRATION,
     });
 
-    return res.json({ token });
+    return res.json({ token, user: { nome: user.nome, id, email } });
   }
 
   async validateCode(req, res) {
-    const { code, email } = req.body;
+    try {
+      const { code, email } = req.body;
 
-    const user = await User.findOne({ where: { email } });
-    console.log(user);
+      const user = await User.findOne({ where: { email } });
+      console.log(user);
 
-    if (code !== user.code) {
-      return res.status(401).json({
-        errors: ['Código errado'],
+      if (code !== user.code) {
+        return res.status(401).json({
+          errors: ['Código errado'],
+        });
+      }
+      await User.update({ email_checked: true }, { where: { email } });
+
+      return res.json('Conta confirmada com sucesso');
+    } catch (err) {
+      return res.json({
+        errors: ['Erro desconhecido ao confirmar conta'],
       });
     }
-    await User.update({ email_checked: true }, { where: { email } });
-
-    return res.json('Conta confirmada com sucesso');
   }
 
   static rand(min = 100000000, max = 999999999) {
