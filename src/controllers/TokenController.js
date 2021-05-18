@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
-
 const nodeMailer = require('nodemailer');
-const User = require('../models/User');
 
+const bcryptjs = require('bcryptjs');
+const User = require('../models/User');
 const SMTP_CONFIG = require('../config/smtpConfig');
 
 function confirmationEmail(email) {
@@ -85,7 +85,6 @@ class TokenController {
       const { code, email } = req.body;
 
       const user = await User.findOne({ where: { email } });
-      console.log(user);
 
       if (code !== user.code) {
         return res.status(401).json({
@@ -98,6 +97,58 @@ class TokenController {
     } catch (err) {
       return res.json({
         errors: ['Erro desconhecido ao confirmar conta'],
+      });
+    }
+  }
+
+  async recoverPassword(req, res) {
+    try {
+      const { email } = req.body;
+
+      await User.findOne({ where: { email } });
+
+      const code = confirmationEmail(email);
+
+      await User.update({ code }, { where: { email } });
+
+      return res.json(`E-mail para redefinir a senha enviado para: ${email}`);
+    } catch (err) {
+      return console.log(err);
+    }
+  }
+
+  async passwordRecovery(req, res) {
+    try {
+      const { password, email, code } = req.body;
+
+      const user = await User.findOne({ where: { email } });
+
+      if (!user) {
+        return res.status(400).json({
+          errors: ['Usuário não encontrado'],
+        });
+      }
+
+      if (code !== user.code) {
+        return res.status(401).json({
+          errors: ['Código errado'],
+        });
+      }
+
+      if (password.length < 6 || password.length > 50) {
+        return res.status(400).json({
+          errors: ['Senha ter entre 6 e 50 caracteres'],
+        });
+      }
+
+      const password_hash = await bcryptjs.hash(password, 8);
+
+      await User.update({ password_hash }, { where: { email } });
+
+      return res.json('Senha alterada com sucesso');
+    } catch (err) {
+      return res.json({
+        errors: ['Erro desconhecido ao alterar senha'],
       });
     }
   }
