@@ -1,6 +1,14 @@
 # A API Rest
 To upload the project on the air with MySQL / MariaDB, copy the .env_example file to .env.
 
+### technologies used
+- Express
+- BcryptJs
+- Helmet
+- JWToken
+- NodeMailer
+- Sequelize
+
 You will also need to add a secret key to the .env file:
 
 TOKEN_SECRET = 'your_secret_key_here'
