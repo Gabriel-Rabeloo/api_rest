@@ -1,5 +1,6 @@
 # A API Rest
-To upload the project on the air with MySQL / MariaDB, copy the .env_example file to .env.
+
+You can view this project in [Netlify](https://gabriel-react-escola.netlify.app)
 
 ### technologies used
 - Express
@@ -8,6 +9,8 @@ To upload the project on the air with MySQL / MariaDB, copy the .env_example fil
 - JWToken
 - NodeMailer
 - Sequelize
+ 
+To upload the project on the air with MySQL / MariaDB, copy the .env_example file to .env.
 
 You will also need to add a secret key to the .env file:
 
