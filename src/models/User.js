@@ -19,6 +19,10 @@ module.exports = class User extends Model {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
+      administrator: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
       code: {
         type: Sequelize.STRING,
       },

@@ -71,5 +71,7 @@ module.exports = class Aluno extends Model {
 
   static associate(models) {
     this.hasMany(models.Foto, { foreignKey: 'aluno_id' });
+    this.belongsTo(models.Matter, { foreignKey: 'matter_id' });
+    this.hasMany(models.Matter, { foreignKey: 'matter_id' });
   }
 };

@@ -5,35 +5,6 @@ const bcryptjs = require('bcryptjs');
 const User = require('../models/User');
 const SMTP_CONFIG = require('../config/smtpConfig');
 
-function confirmationEmail(email) {
-  const transporter = nodeMailer.createTransport({
-    host: SMTP_CONFIG.host,
-    port: SMTP_CONFIG.port,
-    secure: false,
-    auth: {
-      user: SMTP_CONFIG.user,
-      pass: SMTP_CONFIG.pass,
-    },
-    tls: {
-      rejectUnauthorized: false,
-    },
-  });
-  try {
-    const code = TokenController.rand();
-
-    transporter.sendMail({
-      text: code,
-      subject: 'Código de confirmação',
-      from: 'Gabriel Rabelo <dev.gabriel.rabelo@gmail.com>',
-      to: email,
-    });
-
-    return code;
-  } catch (e) {
-    return e;
-  }
-}
-
 class TokenController {
   async store(req, res) {
     const { email = '', password = '' } = req.body;
@@ -60,7 +31,7 @@ class TokenController {
 
     if (user.email_checked === null || user.email_checked === 0 || user.email_checked === false) {
       try {
-        const code = confirmationEmail(email);
+        const code = TokenController.confirmationEmail(email);
 
         await User.update({ code }, { where: { email } });
 
@@ -101,13 +72,13 @@ class TokenController {
     }
   }
 
-  async recoverPassword(req, res) {
+  async forgotPassword(req, res) {
     try {
       const { email } = req.body;
 
       await User.findOne({ where: { email } });
 
-      const code = confirmationEmail(email);
+      const code = TokenController.confirmationEmail(email);
 
       await User.update({ code }, { where: { email } });
 
@@ -155,6 +126,35 @@ class TokenController {
 
   static rand(min = 100000000, max = 999999999) {
     return String(Math.floor(Math.random() * (max - min) + min));
+  }
+
+  static confirmationEmail(email) {
+    const transporter = nodeMailer.createTransport({
+      host: SMTP_CONFIG.host,
+      port: SMTP_CONFIG.port,
+      secure: false,
+      auth: {
+        user: SMTP_CONFIG.user,
+        pass: SMTP_CONFIG.pass,
+      },
+      tls: {
+        rejectUnauthorized: false,
+      },
+    });
+    try {
+      const code = TokenController.rand();
+
+      transporter.sendMail({
+        text: code,
+        subject: 'Código de confirmação',
+        from: 'Gabriel Rabelo <dev.gabriel.rabelo@gmail.com>',
+        to: email,
+      });
+
+      return code;
+    } catch (e) {
+      return e;
+    }
   }
 }
 

@@ -7,8 +7,8 @@ TOKEN_SECRET = 'your_secret_key_here'
 Run the commands below:
 
     npm i
-    npx sequelize db: migrate
-    npx sequelize db: seed: all
+    npx sequelize db:migrate
+    npx sequelize db:seed:all
     npm run dev
 
 At this point your API should be running at http://127.0.0.1:3001/.
@@ -34,7 +34,7 @@ For SQLite the settings are:
 For MySQL / MariaDB the settings are:
 
     require ('dotenv'). config ();
-    
+
     module.exports = {
       host: process.env.DATABASE_HOST,
       port: process.env.DATABASE_PORT,
@@ -45,7 +45,7 @@ For MySQL / MariaDB the settings are:
         timezone: 'America / Sao_Paulo',
       },
       timezone: 'America / Sao_Paulo',
-    
+
       define: {
         timestamps: true,
         underscored: true,
@@ -57,8 +57,8 @@ For MySQL / MariaDB the settings are:
 
 **Note that the settings starting with process.env. comes from the .env file.**
 
-    use { 
-    	    "email": "admin@email.com", 
+    use {
+    	    "email": "admin@email.com",
     	    "password": "123456"
-    	 } 
+    	 }
     to receive a token

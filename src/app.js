@@ -1,3 +1,4 @@
+// a
 const dotenv = require('dotenv');
 const { resolve } = require('path');
 
@@ -14,9 +15,12 @@ const userRoutes = require('./routes/userRoutes');
 const tokenRoutes = require('./routes/tokenRoutes');
 const alunoRoutes = require('./routes/alunoRoutes');
 const photoRoutes = require('./routes/photoRoutes');
+const matterRoutes = require('./routes/matterRoutes');
 
 const whiteList = [
   'http://localhost:3000',
+  'https://gabriel-react-api.netlify.app',
+  '0.0.0.0',
 ];
 
 const corsOptions = {
@@ -50,6 +54,7 @@ class App {
     this.app.use('/tokens', tokenRoutes);
     this.app.use('/alunos', alunoRoutes);
     this.app.use('/photos', photoRoutes);
+    this.app.use('/matters', matterRoutes);
   }
 }
 
