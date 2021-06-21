@@ -18,7 +18,7 @@ const photoRoutes = require('./routes/photoRoutes');
 
 const whiteList = [
   'http://localhost:3000',
-  'https://gabriel-react-api.netlify.app',
+  'https://gabriel-react-escola.netlify.app',
   '0.0.0.0',
 ];
 
