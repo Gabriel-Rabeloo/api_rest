@@ -3,9 +3,8 @@ const databaseConfig = require('../config/database');
 const Aluno = require('../models/Aluno');
 const User = require('../models/User');
 const Foto = require('../models/Foto');
-const Matter = require('../models/Matter');
 
-const models = [Aluno, User, Foto, Matter];
+const models = [Aluno, User, Foto];
 
 const connection = new Sequelize(databaseConfig);
 
