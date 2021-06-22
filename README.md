@@ -1,6 +1,6 @@
 # A API Rest
 
-You can view this project in [Netlify](https://gabriel-react-escola.netlify.app)
+You can view this project on [Netlify](https://gabriel-react-escola.netlify.app)
 
 ### technologies used
 - Express
