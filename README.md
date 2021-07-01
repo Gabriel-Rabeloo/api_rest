@@ -24,48 +24,6 @@ Run the commands below:
 
 At this point your API should be running at http://127.0.0.1:3001/.
 
-If you want to migrate to SQLite, edit the database settings in the .env file, also configure src / config / database.js.
-
-For SQLite the settings are:
-
-    require ('dotenv'). config ();
-
-    module.exports = {
-      dialect: 'sqlite',
-      storage: './db.sqlite',
-      define: {
-        timestamps: true,
-        underscored: true,
-        underscoredAll: true,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at',
-      },
-    };
-
-For MySQL / MariaDB the settings are:
-
-    require ('dotenv'). config ();
-
-    module.exports = {
-      host: process.env.DATABASE_HOST,
-      port: process.env.DATABASE_PORT,
-      username: process.env.DATABASE_USERNAME,
-      password: process.env.DATABASE_PASSWORD,
-      database: process.env.DATABASE,
-      dialectOptions: {
-        timezone: 'America / Sao_Paulo',
-      },
-      timezone: 'America / Sao_Paulo',
-
-      define: {
-        timestamps: true,
-        underscored: true,
-        underscoredAll: true,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at',
-      },
-    };
-
 **Note that the settings starting with process.env. comes from the .env file.**
 
     use {
